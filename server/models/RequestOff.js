@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
 
+const { formatDate } = require('../utils/helpers')
+
 const requestOffSchema = new Schema({
     timeOff: {
         type: String,
@@ -20,9 +22,18 @@ const requestOffSchema = new Schema({
         type: Boolean,
         required: false,
         default: false
-    }},
-    { timestamps: true }
-)
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: createdAtVal => formatDate(createdAtVal)
+    },
+    approvedOn: {
+        type: Date,
+        default: Date.now,
+        get: approvedOnVal => formatDate(approvedOnVal)
+    }
+})
 
 const RequestOff = mongoose.model('RequestOff', requestOffSchema)
 
