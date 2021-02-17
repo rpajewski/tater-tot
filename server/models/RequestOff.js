@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
+const { Schema, model } = require('mongoose');
 
 const { formatDate } = require('../utils/helpers')
 
@@ -35,6 +34,6 @@ const requestOffSchema = new Schema({
     }
 })
 
-const RequestOff = mongoose.model('RequestOff', requestOffSchema)
+const RequestOff = model('RequestOff', requestOffSchema)
 
 module.exports = RequestOff

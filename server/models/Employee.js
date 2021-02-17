@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-const { Schema } = mongoose
+const { Schema, model } = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const RequestOff = require('./RequestOff')
@@ -30,7 +29,7 @@ const employeeSchema = new Schema({
         unique: true,
         validate: {
             validator: function(e) {
-                return /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(e)
+                return /.+@.+\..+/.test(e)
             },
             message: props => `${props.value} is not a valid email address!`
         },
@@ -61,6 +60,6 @@ employeeSchema.methods.isCorrectPassword = async function(password) {
     return await bcrypt.compare(password, this.password)
 }
 
-const Employee = mongoose.model('Employee', employeeSchema)
+const Employee = model('Employee', employeeSchema)
 
 module.exports = Employee
