@@ -42,14 +42,21 @@ const typeDefs = gql`
         role: String!
     }
 
+    input RequestInput {
+        timeOff: String!
+        reason: String!
+        paidTimeOff: Boolean
+        approved: Boolean
+    }
+
     type Mutation {
-        addUser(newEmployee: EmployeeInput!): Auth
+        addEmployee(newEmployee: EmployeeInput!): Auth
         login(email String!, password: String!): Auth
         updateEmployee(phoneNumber: String!, email: String!, password: String!): Employee
-        addRequestOff(employee: ID!): Employee
-        updateRequestOff(_id: ID!, timeOff: String!, paidTimeOff: Boolean!): Employee
-        approveRequestOff(_id: ID!, approvedOn: Boolean!): Employee
-        deleteRequestOff(requestOffId: ID!): Employee
+        addRequestOff(newRequest: RequestInput!): RequestOff
+        updateRequestOff(_id: ID!, timeOff: String!, paidTimeOff: Boolean!): RequestOff
+        approveRequestOff(_id: ID!, approvedOn: Boolean!): RequestOff
+        deleteRequestOff(_id: ID!): Employee
     }
 `
 
