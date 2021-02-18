@@ -7,8 +7,8 @@ const typeDefs = gql`
         reason: String
         paidTimeOff: Boolean
         approved: Boolean
-        createdAt: Date
-        approvedOn: Date
+        createdAt: String
+        approvedOn: String
     }
 
     type Employee {
@@ -22,7 +22,7 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID!
+        token: ID
         employee: Employee
     }
 
@@ -30,33 +30,17 @@ const typeDefs = gql`
         me: Employee
         employees: [Employee]
         requestOffs: [RequestOff]
-        requests(employee: ID!): [RequestOff]
-    }
-
-    input EmployeeInput {
-        firstName: String!
-        lastName: String!
-        phoneNumber: String!
-        email: String!
-        password: String!
-        role: String!
-    }
-
-    input RequestInput {
-        timeOff: String!
-        reason: String!
-        paidTimeOff: Boolean
-        approved: Boolean
+        requests(employee: ID!): Employee
     }
 
     type Mutation {
-        addEmployee(newEmployee: EmployeeInput!): Auth
-        login(email String!, password: String!): Auth
+        addEmployee(firstName: String!, lastName: String!, phoneNumber: String!, email: String!, password: String!, role: String!): Auth
+        login(email: String!, password: String!): Auth
         updateEmployee(phoneNumber: String!, email: String!, password: String!): Employee
-        addRequestOff(newRequest: RequestInput!): RequestOff
-        updateRequestOff(_id: ID!, timeOff: String!, paidTimeOff: Boolean!): RequestOff
-        approveRequestOff(_id: ID!, approvedOn: Boolean!): RequestOff
-        deleteRequestOff(_id: ID!): Employee
+        addRequestOff(timeOff: String!, reason: String!, paidTimeOff: Boolean!): RequestOff
+        updateRequestOff(_id: ID!, timeOff: String, reason: String, paidTimeOff: Boolean): Employee
+        approveRequestOff(employeeId: ID!, requestId: ID!, approved: Boolean): Employee
+        deleteRequestOff(requestId: ID!): Employee
     }
 `
 

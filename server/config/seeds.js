@@ -118,7 +118,7 @@ db.once('open', async () => {
         }
     ])
 
-    console.log(`${employees.length} were seeded to the database!`)
+    console.log(`${employees.length} employees were seeded to the database!`)
 
     process.exit()
 })

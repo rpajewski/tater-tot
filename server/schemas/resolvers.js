@@ -20,18 +20,16 @@ const resolvers = {
                 .populate('requestOffs')
         },
         requestOffs: async (parent, args, context) => {
-            if (context.employee.role === 'supervisor') {
+            if (context.employee) {
                 return await RequestOff.find()
             }
             throw new AuthenticationError('You do not have these permissions!')
         },
         requests: async (parent, args, context) => {
             if (context.employee) {
-                const employee = await Employee.findById(context.employee._id)
+                const employee = await Employee.findById(args.employee)
                     .select('-__v -password')
                     .populate('requestOffs')
-
-                employee.requestOffs.sort((a, b) => b.createdAt - a.createdAt)
 
                 return employee
             }
@@ -39,8 +37,8 @@ const resolvers = {
         }
     },
     Mutation: {
-        addEmployee: async (parent, { newEmployee }) => {
-            const employee = await Employee.create(newEmployee)
+        addEmployee: async (parent, args) => {
+            const employee = await Employee.create(args)
             const token = signToken(employee)
 
             return { token, employee }
@@ -68,27 +66,44 @@ const resolvers = {
             }
             throw new AuthenticationError('Not logged in!')
         },
-        addRequestOff: async (parent, { newRequest }, context) => {
+        addRequestOff: async (parent, args, context) => {
             if (context.employee) {
-                const request = await RequestOff.create(newRequest)
+                const request = await RequestOff.create(args)
 
-                await Employee.findByIdAndUpdate(context.employee._id, { $push: { requestOffs: request }})
+                await Employee.findByIdAndUpdate(context.employee._id, { $push: { requestOffs: request }}, { new: true })
 
                 return request
             }
-            throw new AuthenticationError('Not Logged in!')
+            throw new AuthenticationError('Not logged in!')
         },
-        updateRequestOff: async (parent, { _id, timeOff, paidTimeOff }) => {
-            return await RequestOff.findByIdAndUpdate(_id, { $set: { timeOff: timeOff, paidTimeOff: paidTimeOff }}, { new: true })
+        updateRequestOff: async (parent, args, context) => {
+            if (context.employee) {
+                const updatedEmployee = await Employee.findByIdAndUpdate(
+                    { _id: context.employee._id },
+                    { $set: { requestOffs: args }},
+                    { new: true }
+                )
+                return updatedEmployee
+            }
+            throw new AuthenticationError('Not logged in!')
         },
-        approveRequestOff: async (parent, { _id, approvedOn }) => {
-            return await RequestOff.findByIdAndUpdate(_id, { $set: { approvedOn: approvedOn }}, { new: true })
+        approveRequestOff: async (parent, { employeeId, requestId, approved }, context) => {
+            if (context.employee) {
+                const updatedEmployee = await Employee.findByIdAndUpdate(
+                    { _id: employeeId },
+                    { $set: { requestOffs: { _id: requestId, approved: approved }}},
+                    { new: true }
+                )
+                console.log(updatedEmployee)
+                return updatedEmployee
+            }
+            throw new AuthenticationError('Not logged in!')
         },
-        deleteRequestOff: async (parent, { _id }, context) => {
+        deleteRequestOff: async (parent, { requestId }, context) => {
             if (context.employee) {
                 const updatedEmployee = await Employee.findOneAndUpdate(
                     { _id: context.employee._id },
-                    { $pull: {requestOffs: { _id: _id }}},
+                    { $pull: { requestOffs: { _id: requestId }}},
                     { new: true }
                 )
                 return updatedEmployee

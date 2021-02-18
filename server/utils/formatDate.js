@@ -17,7 +17,7 @@ const addDateSuffix = date => {
     return dateStr
 }
 
-const formatDate = ( timestamp, { monthLength = 'short', dateSuffix = true } ) => {
+module.exports = ( timestamp, { monthLength = 'short', dateSuffix = true } = {} ) => {
     let months
 
     if (monthLength === 'short') {
@@ -95,5 +95,3 @@ const formatDate = ( timestamp, { monthLength = 'short', dateSuffix = true } ) =
 
     return formattedTimeStamp
 }
-
-module.exports = { formatDate }

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const { formatDate } = require('../utils/helpers')
+const formatDate = require('../utils/formatDate')
 
 const requestOffSchema = new Schema({
     timeOff: {
@@ -29,7 +29,6 @@ const requestOffSchema = new Schema({
     },
     approvedOn: {
         type: Date,
-        default: Date.now,
         get: approvedOnVal => formatDate(approvedOnVal)
     }
 })
