@@ -39,7 +39,7 @@ const typeDefs = gql`
         updateEmployee(phoneNumber: String!, email: String!, password: String!): Employee
         addRequestOff(timeOff: String!, reason: String!, paidTimeOff: Boolean!): RequestOff
         updateRequestOff(_id: ID!, timeOff: String, reason: String, paidTimeOff: Boolean): Employee
-        approveRequestOff(employeeId: ID!, requestId: ID!, approved: Boolean): Employee
+        approveRequestOff(employeeId: ID!, requestId: ID!, approved: Boolean!): Employee
         deleteRequestOff(requestId: ID!): Employee
     }
 `
