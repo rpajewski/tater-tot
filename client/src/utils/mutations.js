@@ -23,7 +23,7 @@ export const LOGIN = gql`
 `
 
 export const UPDATE_EMPLOYEE = gql`
-    mutation updateEmployee($phoneNumber:String, $email:String, password:String) {
+    mutation updateEmployee($phoneNumber:String, $email:String, $password:String) {
         updateEmployee(phoneNumber:$phoneNumber, email:$email, password:$password) {
             _id
             firstName
