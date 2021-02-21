@@ -7,7 +7,7 @@ import {
 } from './actions'
 
 const initialState = {
-    employee = [],
+    employee: [],
     requestOffs: [],
     employees: []
 }
