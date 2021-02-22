@@ -1,47 +1,47 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Auth from '../../utils/auth'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/images/logo256.png'
 import 'bulma'
 
 function Nav() {
+    const location = useLocation()
+    const path = location.pathname.match('([^/\d]+)[^/]*$')
+    const title = ''
+
+    function heroBannerTitle(pathname) {
+        switch(pathname) {
+            case 'login':
+                return 
+            case 'employee':
+                return console.log('its working?')
+            default:
+                return
+        }
+    }
+
+    if (path !== null) {
+        heroBannerTitle(path[1])
+    }
 
     function topNav() {
         if (Auth.loggedIn()) {
             return (
-            <div id="navbarMenuHeroA" className="navbar-menu">
-                <div className="navbar-end">
-                    <a href="/" className="navbar-item">
-                        Home
-                    </a>
-                    <span className="navbar-item">
-                        <a href="/"  className="button is-primary is-inverted" onClick={() => Auth.logout()}>
-                            <span className="icon">
-                                <i className="fas fa-sign-out-alt"></i>
-                            </span>
-                            <span>Logout</span>
-                        </a>
+                <a href="/"  className="button is-primary is-inverted" onClick={() => Auth.logout()}>
+                    <span className="icon">
+                        <i className="fas fa-sign-out-alt"></i>
                     </span>
-                </div>
-            </div>
+                    <span>Logout</span>
+                </a>
             )
         } else {
             return (
-            <div id="navbarMenuHeroA" className="navbar-menu">
-                <div className="navbar-end">
-                    <a href="/" className="navbar-item">
-                        Home
-                    </a>
-                    <span className="navbar-item">
-                        <Link to="/login" className="button is-primary is-inverted">
-                                <span className="icon">
-                                    <i className="fas fa-sign-in-alt"></i>
-                                </span>
-                                <span>Sign In</span>
-                        </Link>
+                <Link to="/login" className="button is-primary is-inverted">
+                    <span className="icon">
+                        <i className="fas fa-sign-in-alt"></i>
                     </span>
-                </div>
-            </div>
+                    <span>Sign In</span>
+                </Link>
             )
         }
     }
@@ -49,29 +49,17 @@ function Nav() {
     function bottomNav() {
         if (Auth.loggedIn()) {
             return (
-                <div className="hero-foot">
-                    <nav className="tabs">
-                        <div className="container">
-                            <ul>
-                                <li><Link to="/overview/:id" className="navbar-item">Overview</Link></li>
-                                <li><Link to="/requestoff" className="navbar-item">Request Off</Link></li>
-                                <li><Link to="/directory" className="navbar-item">Directory</Link></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+                <ul>
+                    <li><Link to="/overview/:id" className="navbar-item">Overview</Link></li>
+                    <li><Link to="/requestoff:id" className="navbar-item">Request Off</Link></li>
+                    <li><Link to="/directory" className="navbar-item">Directory</Link></li>
+                </ul>
             )
         } else {
             return (
-            <div className="hero-foot">
-                <nav className="tabs">
-                    <div className="container">
-                        <ul>
-                            <li><Link to="/signup/employee" className="navbar-item">Sign Up</Link></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+                <ul>
+                    <li><Link to="/signup/employee" className="navbar-item">Sign Up</Link></li>
+                </ul>
             )
         }
     }
@@ -92,7 +80,17 @@ function Nav() {
                                 <span></span>
                             </span>
                         </div>
-                        {topNav()}
+
+                        <div id="navbarMenuHeroA" className="navbar-menu">
+                            <div className="navbar-end">
+                                <a href="/" className="navbar-item">
+                                    Home
+                                </a>
+                                <span className="navbar-item">
+                                    {topNav()}
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -104,7 +102,14 @@ function Nav() {
                 </div>
             </div>
 
-            {bottomNav()}
+            <div className="hero-foot">
+                <nav className="tabs">
+                    <div className="container">
+                        {bottomNav()}
+                    </div>
+                </nav>
+            </div>
+
         </header>
     )
 }
