@@ -1,5 +1,6 @@
 import {
     UPDATE_USER,
+    ALL_REQUESTS,
     ADD_RO,
     REMOVE_RO,
     UPDATE_REQUEST_OFFS,
@@ -13,11 +14,18 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
+    console.log(action)
     switch(action.type) {
         case UPDATE_USER:
             return {
                 ...state,
                 employee: action.employee
+            }
+
+        case ALL_REQUESTS:
+            return {
+                ...state,
+                requestOffs: [action.requestsOffs]
             }
         
         case ADD_RO:

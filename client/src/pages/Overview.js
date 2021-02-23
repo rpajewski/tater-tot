@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { iDBPromise } from '../utils/helpers'
 
-import { QUERY_ME } from '../utils/queries'
-import { UPDATE_USER, ADD_RO } from '../utils/actions'
+import { QUERY_ME, QUERY_REQUEST_OFFS } from '../utils/queries'
+import { UPDATE_USER, ALL_REQUESTS } from '../utils/actions'
 
 const Overview = () => {
-    const { id: employeeId } = useParams()
     const dispatch = useDispatch()
     const state = useSelector(state => state)
     console.log(state)
 
     const { loading, data } = useQuery(QUERY_ME)
+    const { loading: requestLoading, data: requestData } = useQuery(QUERY_REQUEST_OFFS)
+    console.log(requestData)
 
     useEffect(() => {
         if(data) {
@@ -23,15 +23,15 @@ const Overview = () => {
             })
             iDBPromise('employee', 'put', data.me)
             
-            if (data.me.requestOffs[0]) {
-                dispatch({
-                    type: ADD_RO,
-                    requestOffs: data.me.requestOffs
-                })
-                data.me.requestOffs.forEach(request => {
-                    iDBPromise('requestOffs', 'put', request)
-                })
-            }
+            // if (data.me.requestOffs[0]) {
+            //     dispatch({
+            //         type: ADD_RO,
+            //         requestOffs: data.me.requestOffs
+            //     })
+            //     data.me.requestOffs.forEach(request => {
+            //         iDBPromise('requestOffs', 'put', request)
+            //     })
+            // }
         }
         else if (!loading) {
             iDBPromise('employee', 'get').then((employee) => {
@@ -42,6 +42,23 @@ const Overview = () => {
             })
         }
     }, [data, loading, dispatch])
+
+    useEffect(() => {
+        if (requestData) {
+            dispatch({
+                type: ALL_REQUESTS,
+                requestOffs: requestData.requestOffs
+            })
+        }
+        else if (!requestLoading) {
+            iDBPromise('requestOffs', 'get').then((request) => {
+                dispatch({
+                    type: ALL_REQUESTS,
+                    requestOffs: request
+                })
+            })
+        }
+    }, [requestData, requestLoading, dispatch])
 
     function checkForRequests() {
         const requests = data.me.requestOffs

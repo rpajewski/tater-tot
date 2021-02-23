@@ -6,16 +6,15 @@ import logo from '../../assets/images/logo256.png'
 function Nav() {
     const location = useLocation()
     const path = location.pathname.match('([^/\d]+)[^/]*$')
-    const title = ''
 
     function heroBannerTitle(pathname) {
         switch(pathname) {
             case 'login':
                 return 
             case 'employee':
-                return
+                return console.log()
             default:
-                return
+                return console.log('hi')
         }
     }
 
