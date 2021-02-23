@@ -8,7 +8,7 @@ function Login(props) {
     const [formState, setFormState] = useState({ email: '', password: '' })
     const [login, { error }] = useMutation(LOGIN)
 
-    const handleChange = (event) => {
+    const handleChange = event => {
         const { name, value } = event.target
 
         setFormState({
@@ -24,7 +24,8 @@ function Login(props) {
             const { data } = await login({
                 variables: { ...formState }
             })
-            Auth.login(data.login.token)
+            const id = data.login.employee._id
+            Auth.login(data.login.token, id)
         }
         catch (err) {
             console.error(err)

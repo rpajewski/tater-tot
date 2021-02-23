@@ -29,10 +29,10 @@ class AuthService {
         return localStorage.getItem('id_token')
     }
 
-    login(idToken) {
+    login(idToken, id) {
         localStorage.setItem('id_token', idToken)
 
-        window.location.assign('/')
+        window.location.assign(`/overview/${id}`)
     }
 
     logout() {

@@ -7,7 +7,7 @@ import {
 } from './actions'
 
 const initialState = {
-    employee: [],
+    employee: '',
     requestOffs: [],
     employees: []
 }
@@ -17,13 +17,13 @@ function reducer(state = initialState, action) {
         case UPDATE_USER:
             return {
                 ...state,
-                employee: [...action.employee]
+                employee: action.employee
             }
         
         case ADD_RO:
             return {
                 ...state,
-                requestOffs: [...action.requestOffs]
+                requestOffs: [action.requestOffs]
             }
 
         case REMOVE_RO:

@@ -30,7 +30,7 @@ const typeDefs = gql`
         me: Employee
         employees: [Employee]
         requestOffs: [RequestOff]
-        requests(employee: ID!): Employee
+        requests(employeeId: ID!): Employee
     }
 
     type Mutation {
@@ -38,7 +38,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         updateEmployee(phoneNumber: String, email: String, password: String): Employee
         addRequestOff(timeOff: String, reason: String, paidTimeOff: Boolean): RequestOff
-        updateRequestOff(_id: ID!, timeOff: String, reason: String, paidTimeOff: Boolean): Employee
+        updateRequestOff(requestId: ID!, timeOff: String, reason: String, paidTimeOff: Boolean): Employee
         approveRequestOff(employeeId: ID!, requestId: ID!, approved: Boolean!): Employee
         deleteRequestOff(requestId: ID!): Employee
     }

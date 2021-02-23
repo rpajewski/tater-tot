@@ -27,10 +27,10 @@ const resolvers = {
         },
         requests: async (parent, args, context) => {
             if (context.employee) {
-                const employee = await Employee.findById(args.employee)
+                const employee = await Employee.findById(args.employeeId)
                     .select('-__v -password')
                     .populate('requestOffs')
-
+                    
                 return employee
             }
             throw new AuthenticationError('Not logged in!')

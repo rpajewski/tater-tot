@@ -1,6 +1,6 @@
-import gqp from 'graphql-tag'
+import gql from 'graphql-tag'
 
-export const QUERY_ME = gqp`
+export const QUERY_ME = gql`
     {
         me {
             _id
@@ -22,7 +22,7 @@ export const QUERY_ME = gqp`
     }
 `
 
-export const QUERY_EMPLOYEES = gqp`
+export const QUERY_EMPLOYEES = gql`
     {
         employees {
             _id
@@ -39,6 +39,7 @@ export const QUERY_EMPLOYEES = gqp`
                 approved
                 createdAt
                 approvedOn
+            }
         }
     }
 `
@@ -58,8 +59,8 @@ export const QUERY_REQUEST_OFFS = gql`
 `
 
 export const QUERY_EMPLOYEE_REQUESTS = gql`
-    query requests($employee: ID!) {
-        requests(employee: $employee) {
+    query requests($employeeId: ID!) {
+        requests(employeeId: $employeeId) {
             requestOffs {
                 _id
                 timeOff

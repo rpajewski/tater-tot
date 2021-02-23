@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Auth from '../../utils/auth'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/images/logo256.png'
-import 'bulma'
 
 function Nav() {
     const location = useLocation()
@@ -14,7 +13,7 @@ function Nav() {
             case 'login':
                 return 
             case 'employee':
-                return console.log('its working?')
+                return
             default:
                 return
         }
