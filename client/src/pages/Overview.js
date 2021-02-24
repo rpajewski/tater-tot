@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { iDBPromise } from '../utils/helpers'
 
@@ -10,7 +10,6 @@ import { UPDATE_USER, ALL_REQUESTS } from '../utils/actions'
 const Overview = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
-    console.log(state)
 
     const { loading, data } = useQuery(QUERY_ME)
     const { loading: requestLoading, data: requestData } = useQuery(QUERY_REQUEST_OFFS)
@@ -80,7 +79,7 @@ const Overview = () => {
                                 Role: Supervisor
                             </p>
                             <br />
-                            <a href={`/updateinfo/${data.me._id}`} className="button is-info is-outlined is-fullwidth">Change Info</a>
+                            <Link to={`/updateinfo/${data.me._id}`} className="button is-info is-outlined is-fullwidth">Change Info</Link>
                         </div>
                     </div>
 
@@ -92,7 +91,7 @@ const Overview = () => {
                                 You have {approvedRequests.length} approved requests coming up.
                             </p>
                             <br />
-                            <a href={`/directory/${data.me._id}`} className="button is-success is-outlined is-fullwidth">Find Coverage</a>
+                            <Link to={`/directory/${data.me._id}`} className="button is-success is-outlined is-fullwidth">Find Coverage</Link>
                         </div>
                     </div>
 
@@ -104,7 +103,7 @@ const Overview = () => {
                                 You have {unapprovedRequests.length} requests waiting for approval.
                             </p>
                             <br />
-                            <a href={`/requestoff/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Review Them Now</a>
+                            <Link to={`/requestoff/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Review Them Now</Link>
                         </div>
                     </div>
                 </div>
@@ -160,7 +159,7 @@ const Overview = () => {
                             <br />
                             {displayRequest()}
                             <br />
-                            <a href={`/requestoff/${data.me._id}`} className="button is-success is-outlined is-fullwidth">Submit Another Request</a>
+                            <Link to={`/requestoff/${data.me._id}`} className="button is-success is-outlined is-fullwidth">Submit Another Request</Link>
                         </div>
                     </div>
                 </div>
@@ -177,7 +176,7 @@ const Overview = () => {
                                 Role: Employee
                             </p>
                             <br />
-                            <a href={`/updateinfo/${data.me._id}`} className="button is-info is-outlined is-fullwidth">Change Info</a>
+                            <Link to={`/updateinfo/${data.me._id}`} className="button is-info is-outlined is-fullwidth">Change Info</Link>
                         </div>
                     </div>
 
@@ -189,7 +188,7 @@ const Overview = () => {
                                 You have {unapprovedRequests.length} requests waiting for approval.
                             </p>
                             <br />
-                            <a href={`/directory/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Find Coverage</a>
+                            <Link to={`/directory/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Find Coverage</Link>
                         </div>
                     </div>
                 </div>

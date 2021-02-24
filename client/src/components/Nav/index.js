@@ -40,15 +40,15 @@ function Nav() {
         if (Auth.loggedIn()) {
             return (
                 <ul>
-                    <li><a href={`/overview/${employeeId}`} className="navbar-item">Overview</a></li>
-                    <li><a href={`/requestoff/${employeeId}`} className="navbar-item">Request Off</a></li>
-                    <li><a href={`/directory/${employeeId}`} className="navbar-item">Directory</a></li>
+                    <li><Link to={`/overview/${employeeId}`} className="navbar-item">Overview</Link></li>
+                    <li><Link to={`/requestoff/${employeeId}`} className="navbar-item">Request Off</Link></li>
+                    <li><Link to={`/directory/${employeeId}`} className="navbar-item">Directory</Link></li>
                 </ul>
             )
         } else {
             return (
                 <ul>
-                    <li><a href="/signup/employee" className="navbar-item">Sign Up</a></li>
+                    <li><Link to="/signup/employee" className="navbar-item">Sign Up</Link></li>
                 </ul>
             )
         }
@@ -60,10 +60,10 @@ function Nav() {
                 <nav className="navbar">
                     <div className="container">
                         <div className="navbar-brand">
-                            <a href="/" className="navbar-item">
+                            <Link to="/" className="navbar-item">
                                 <img src={logo}></img>
                                 <h1 className="title">Tater</h1>
-                            </a>
+                            </Link>
                         </div>
 
                         <a onClick={() => { setisActive(!isActive) }}
