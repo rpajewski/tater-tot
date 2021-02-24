@@ -4,7 +4,7 @@ import Auth from '../utils/auth'
 import { LOGIN } from '../utils/mutations'
 import signinphoto from '../assets/images/signin.jpg'
 
-function Login(props) {
+function Login() {
     const [formState, setFormState] = useState({ email: '', password: '' })
     const [login, { error }] = useMutation(LOGIN)
 

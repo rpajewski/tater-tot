@@ -115,7 +115,7 @@ const Overview = () => {
         let approvedRequests = []
         let unapprovedRequests = []
 
-        if (requests) {
+        if (!requests) {
             approvedRequests = requests
             unapprovedRequests = requests
         }
