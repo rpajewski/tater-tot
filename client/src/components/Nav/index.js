@@ -1,26 +1,16 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import Auth from '../../utils/auth'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../../assets/images/logo256.png'
 
 function Nav() {
+    const state = useSelector(state => state)
+    const { employee } = state
+    const employeeId = employee._id
+
     const location = useLocation()
-    const path = location.pathname.match('([^/\d]+)[^/]*$')
-
-    function heroBannerTitle(pathname) {
-        switch(pathname) {
-            case 'login':
-                return 
-            case 'employee':
-                return console.log()
-            default:
-                return console.log('hi')
-        }
-    }
-
-    if (path !== null) {
-        heroBannerTitle(path[1])
-    }
+    const path = location.pathname.match('([^/\]+)[^/]*$')
 
     function topNav() {
         if (Auth.loggedIn()) {
@@ -48,20 +38,20 @@ function Nav() {
         if (Auth.loggedIn()) {
             return (
                 <ul>
-                    <li><Link to="/overview/:id" className="navbar-item">Overview</Link></li>
-                    <li><Link to="/requestoff:id" className="navbar-item">Request Off</Link></li>
-                    <li><Link to="/directory" className="navbar-item">Directory</Link></li>
+                    <li><a href={`/overview/${employeeId}`} className="navbar-item">Overview</a></li>
+                    <li><a href={`/requestoff/${employeeId}`} className="navbar-item">Request Off</a></li>
+                    <li><a href={`/directory/${employeeId}`} className="navbar-item">Directory</a></li>
                 </ul>
             )
         } else {
             return (
                 <ul>
-                    <li><Link to="/signup/employee" className="navbar-item">Sign Up</Link></li>
+                    <li><a href="/signup/employee" className="navbar-item">Sign Up</a></li>
                 </ul>
             )
         }
     }
-
+    
     return (
         <header className="hero is-primary is-medium">
             <div className="hero-head">

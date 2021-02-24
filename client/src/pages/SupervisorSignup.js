@@ -24,7 +24,8 @@ function SupervisorSignup(props) {
             const { data } = await addEmployee({
                 variables: { ...formState }
             })
-            Auth.login(data.addEmployee.token)
+            const id = data.addEmployee.employee._id
+            Auth.login(data.addEmployee.token, id)
         }
         catch (err) {
             console.error(err)
@@ -33,7 +34,8 @@ function SupervisorSignup(props) {
 
     return (
         <section className="section">
-        <div className="columns">
+        <h1 className="title has-text-centered">Sign Up</h1>
+        <div className="columns is-vcentered">
             <div className="column"></div>
             <div className="box column is-one-third">
                 <form onSubmit={handleFormSubmit}>

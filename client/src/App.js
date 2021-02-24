@@ -9,6 +9,7 @@ import Overview from './pages/Overview'
 import Login from './pages/Login'
 import EmployeeSignup from './pages/EmployeeSignup'
 import SupervisorSignup from './pages/SupervisorSignup'
+import UpdateInfo from './pages/UpdateInfo'
 import RequestOff from './pages/RequestOff'
 import Directory from './pages/Directory'
 import NoMatch from './pages/NoMatch'
@@ -43,8 +44,9 @@ function App() {
               <Route exact path="/signup/employee" component={EmployeeSignup} />
               <Route exact path="/signup/supervisor" component={SupervisorSignup} />
               <Route exact path="/overview/:id" component={Overview} />
+              <Route exact path="/updateinfo/:id" component={UpdateInfo} />
               <Route exact path="/requestoff/:id" component={RequestOff} />
-              <Route exact path="/directory" component={Directory} />
+              <Route exact path="/directory/:id" component={Directory} />
               <Route component={NoMatch} />
             </Switch>
           </Provider>

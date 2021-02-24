@@ -14,7 +14,6 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-    console.log(action)
     switch(action.type) {
         case UPDATE_USER:
             return {
@@ -25,7 +24,7 @@ function reducer(state = initialState, action) {
         case ALL_REQUESTS:
             return {
                 ...state,
-                requestOffs: [action.requestsOffs]
+                requestOffs: [...action.requestOffs]
             }
         
         case ADD_RO:
