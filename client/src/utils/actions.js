@@ -1,6 +1,3 @@
 export const UPDATE_USER = 'UPDATE_USER'
 export const ALL_REQUESTS = 'ALL_REQUESTS'
-export const ADD_RO = 'ADD_RO'
-export const REMOVE_RO = 'REMOVE_RO'
 export const UPDATE_EMPLOYEES = 'UPDATE_EMPLOYEES'
-export const UPDATE_REQUEST_OFFS = 'UPDATE_REQUEST_OFFS'

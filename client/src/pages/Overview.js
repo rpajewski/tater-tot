@@ -10,7 +10,7 @@ import { UPDATE_USER, ALL_REQUESTS } from '../utils/actions'
 const Overview = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
-    // console.log(state)
+    console.log(state)
 
     const { loading, data } = useQuery(QUERY_ME)
     const { loading: requestLoading, data: requestData } = useQuery(QUERY_REQUEST_OFFS)

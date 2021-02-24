@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Auth from '../../utils/auth'
 import { Link, useLocation } from 'react-router-dom'
@@ -8,6 +8,8 @@ function Nav() {
     const state = useSelector(state => state)
     const { employee } = state
     const employeeId = employee._id
+
+    const [isActive, setisActive] = useState(false)
 
     const location = useLocation()
     const path = location.pathname.match('([^/\]+)[^/]*$')
@@ -60,16 +62,22 @@ function Nav() {
                         <div className="navbar-brand">
                             <a href="/" className="navbar-item">
                                 <img src={logo}></img>
-                                <h1>Tater</h1>
+                                <h1 className="title">Tater</h1>
                             </a>
-                            <span className="navbar-burger" data-target="navbarMenuHeroA">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </span>
                         </div>
 
-                        <div id="navbarMenuHeroA" className="navbar-menu">
+                        <a onClick={() => { setisActive(!isActive) }}
+                        role="button" 
+                        className={`navbar-burger ${isActive ? 'is-active' : ''}`} 
+                        aria-label="menu"
+                        aria-expanded="false"
+                        data-target="navbarMenuHeroA">
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                            <span aria-hidden="true"></span>
+                        </a>
+
+                        <div id="navbarMenuHeroA" className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
                             <div className="navbar-end">
                                 <a href="/" className="navbar-item">
                                     Home

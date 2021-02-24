@@ -1,9 +1,6 @@
 import {
     UPDATE_USER,
     ALL_REQUESTS,
-    ADD_RO,
-    REMOVE_RO,
-    UPDATE_REQUEST_OFFS,
     UPDATE_EMPLOYEES
 } from './actions'
 
@@ -25,33 +22,6 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 requestOffs: [...action.requestOffs]
-            }
-        
-        case ADD_RO:
-            return {
-                ...state,
-                requestOffs: [action.requestOffs]
-            }
-
-        case REMOVE_RO:
-            let newState = state.requestOffs.filter(requestOff => {
-                return requestOff._id !== action._id
-            })
-
-            return {
-                ...state,
-                requestOffs: newState
-            }
-
-        case UPDATE_REQUEST_OFFS:
-            return {
-                ...state,
-                requestOffs: state.requestOffs.map(requestOff => {
-                    if (action._id === requestOff._id) {
-                        requestOff.approved = action.approved
-                    }
-                    return requestOff
-                })
             }
 
         case UPDATE_EMPLOYEES:
