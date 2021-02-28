@@ -1,5 +1,5 @@
 {
-  "name": "tator-tot",
+  "name": "tater-tot",
   "version": "1.0.0",
   "description": "Tator ToT is an employer specific application that allows employees to request time off and supervisors to view those request off submissions all in one dashboard. Employees will also have to ability to look up other co-workers for contact information in the event they want to trade shifts.",
   "main": "server/server.js",

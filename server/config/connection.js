@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tator-tot', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/tater-tot', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
