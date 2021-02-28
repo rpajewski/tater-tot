@@ -4,8 +4,8 @@
 Tater ToT is any businesses time off tracker. As a supervisor you can keep track and approve request offs in one convenient place. Employees can create an account, add request offs and track when they are approved. If their request hasn't been approved by the time they need off there is an employee directory where they can find their co-workers contact info so that they can cover their own shift. 
 
 Deployment Info:
-GitHub: https://github.com/rpajewski/tater-tot
-Heroku: 
+GitHub: https://github.com/rpajewski/tater-tot  
+Heroku: https://aqueous-stream-94024.herokuapp.com/
 
 ## Table of Contents
 
