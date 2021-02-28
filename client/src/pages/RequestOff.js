@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { iDBPromise } from '../utils/helpers'
+import { useSelector } from 'react-redux'
 
-import { UPDATE_USER, ALL_REQUESTS } from '../utils/actions'
 import ApprovedRequests from '../components/ApprovedRequests'
 import PendingRequests from '../components/PendingRequests'
 import RequestOffForm from '../components/RequestOffForm'
 
 const RequestOff = () => {
-    const dispatch = useDispatch()
     const state = useSelector(state => state)
 
     const { employee, requestOffs } = state
@@ -43,6 +40,7 @@ const RequestOff = () => {
                                         timeOff={request.timeOff}
                                         reason={request.reason}
                                         paidTimeOff={request.paidTimeOff}
+                                        role="supervisor"
                                         />
                                     ))}
                                 </div>
@@ -68,6 +66,7 @@ const RequestOff = () => {
                                         timeOff= {request.timeOff}
                                         reason= {request.reason}
                                         paidTimeOff= {request.paidTimeOff}
+                                        role="supervisor"
                                         />
                                     ))}
                                 </div>
@@ -123,6 +122,7 @@ const RequestOff = () => {
                                         timeOff={request.timeOff}
                                         reason={request.reason}
                                         paidTimeOff={request.paidTimeOff}
+                                        role="employee"
                                         />
                                     ))}
                                 </div>
@@ -148,6 +148,7 @@ const RequestOff = () => {
                                         timeOff= {request.timeOff}
                                         reason= {request.reason}
                                         paidTimeOff= {request.paidTimeOff}
+                                        role="employee"
                                         />
                                     ))}
                                 </div>

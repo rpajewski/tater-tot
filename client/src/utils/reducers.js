@@ -1,6 +1,7 @@
 import {
     UPDATE_USER,
     ALL_REQUESTS,
+    UPDATE_REQUESTS,
     UPDATE_EMPLOYEES
 } from './actions'
 
@@ -22,6 +23,12 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 requestOffs: [...action.requestOffs]
+            }
+        
+        case UPDATE_REQUESTS:
+            return {
+                ...state,
+                requestOffs: [...state.requestOffs, action.requestOff]
             }
 
         case UPDATE_EMPLOYEES:

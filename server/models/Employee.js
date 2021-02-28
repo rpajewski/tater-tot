@@ -18,7 +18,7 @@ const employeeSchema = new Schema({
         type: String,
         validate: {
             validator: function(p) {
-                return /\d{3}-\d{3}-\d{4}/.test(p)
+                return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(p)
             },
             message: props => `${props.value} is not a valid phone number!`
         },

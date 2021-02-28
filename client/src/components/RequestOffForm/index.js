@@ -1,10 +1,25 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/react-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { ADD_REQUEST_OFF } from '../../utils/mutations'
+import { iDBPromise } from '../../utils/helpers'
+
+import { UPDATE_REQUESTS } from '../../utils/actions'
 
 const RequestOffForm = () => {
+    const state = useSelector(state => state)
+    const { employee } = state
+    const dispatch = useDispatch()
     const [formState, setFormState] = useState({ timeOff: '', reason: '', paidTimeOff: false })
     const [addRequestOff, {error}] = useMutation(ADD_REQUEST_OFF)
+
+    const updateRequestOff = (request) => {
+        dispatch({
+            type: UPDATE_REQUESTS,
+            requestOffs: request.addRequestOff
+        })
+        iDBPromise('requestOffs', 'put', request.addRequestOff)
+    }
 
     const handleChange = event => {
         let { name, value } = event.target
@@ -27,19 +42,21 @@ const RequestOffForm = () => {
         event.preventDefault()
 
         try {
-            await addRequestOff({
+            const { data } = await addRequestOff({
                 variables: { ...formState }
             })
+            updateRequestOff(data)
         }
         catch (err) {
             console.error(err)
         }
+        window.location.assign(`/overview/${employee._id}`)
     }
 
     return (
             <div className="columns is-vcentered">
                 <div className="box column is-10 is-offset-1">
-                    <form onSubmit={handleFormSubmit}>
+                    <form id="form" onSubmit={handleFormSubmit}>
                         <div className="field">
                             <label className="label">Request Dates Off:</label>
                             <p className="control has-icons-left has-icons-right">

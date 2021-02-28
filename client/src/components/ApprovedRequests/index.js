@@ -11,10 +11,10 @@ const ApprovedRequests = (request) => {
 
     let { paidTimeOff } = request
     if (paidTimeOff) {
-        paidTimeOff = 'Paid - Dont spend it all in one place'
+        paidTimeOff = <i className="fas fa-dollar-sign"></i>
     }
     else {
-        paidTimeOff = 'Not paid time off'
+        paidTimeOff = <i className="fab fa-creative-commons-nc"></i>
     }
 
     return (

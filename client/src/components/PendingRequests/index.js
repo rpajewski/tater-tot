@@ -1,28 +1,52 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 const PendingRequests = (request) => {
     const {
         _id,
+        employeeId,
         timeOff,
         reason,
-        approved,
-        approvedOn
+        approvedOn,
+        role
     } = request
 
     let { paidTimeOff } = request
     if (paidTimeOff) {
-        paidTimeOff = 'Paid - Dont spend it all in one place'
+        paidTimeOff = <i className="fas fa-dollar-sign"></i>
     }
     else {
-        paidTimeOff = 'Not paid time off'
+        paidTimeOff = <i className="fab fa-creative-commons-nc"></i>
+    }
+
+    const handleChange = value => {
+        if (value === 'approved') {
+
+        }
+        else {
+
+        }
+    }
+
+    if (role === 'supervisor') {
+        return (
+            <div className="box">
+                <h1 className="title">{timeOff} - {paidTimeOff}</h1>
+                <p className="subtitle">{reason}</p>
+                <div className="select is-rounded is-warning">
+                    <select key={_id} onChange={(val) => handleChange(val.target.value)}>
+                        <option value="unapproved">Unapproved</option>
+                        <option value="approved">Approve</option>
+                    </select>
+                </div>
+            </div>
+        )
     }
 
     return (
         <div className="box">
-            <h1 className="title">{timeOff}</h1>
-            <br />
+            <h1 className="title">{timeOff} - {paidTimeOff}</h1>
             <p className="subtitle">{reason}</p>
-            <h1>{paidTimeOff}</h1>
         </div>
     )
 }
