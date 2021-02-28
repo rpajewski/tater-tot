@@ -166,6 +166,18 @@ const Overview = () => {
 
                 <div className="columns">
                     <div className="column">
+                        <div className="notification is-warning is-light">
+                            <p className="title">Pending Request Offs</p>
+                            <br />
+                            <p className="subtitle">
+                                You have {unapprovedRequests.length} requests waiting for approval.
+                            </p>
+                            <br />
+                            <Link to={`/directory/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Find Coverage</Link>
+                        </div>
+                    </div>
+
+                    <div className="column">
                         <div className="notification is-info is-light">
                             <p className="title">Employee Info:</p>
                             <br />
@@ -177,18 +189,6 @@ const Overview = () => {
                             </p>
                             <br />
                             <Link to={`/updateinfo/${data.me._id}`} className="button is-info is-outlined is-fullwidth">Change Info</Link>
-                        </div>
-                    </div>
-
-                    <div className="column">
-                        <div className="notification is-warning is-light">
-                            <p className="title">Pending Request Offs</p>
-                            <br />
-                            <p className="subtitle">
-                                You have {unapprovedRequests.length} requests waiting for approval.
-                            </p>
-                            <br />
-                            <Link to={`/directory/${data.me._id}`} className="button is-warning is-outlined is-fullwidth">Find Coverage</Link>
                         </div>
                     </div>
                 </div>
